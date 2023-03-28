@@ -11,6 +11,7 @@ import productsFromServer from './api/products';
 const initialProducts = productsFromServer.map((product) => {
   const category = categoriesFromServer
     .find(el => el.id === product.categoryId);
+
   const user = usersFromServer.find(el => el.id === category.ownerId);
 
   return {
@@ -32,9 +33,14 @@ const filterProducts = (products, selectedUser, query, categories) => {
       .filter(product => categories.includes(product.category));
   }
 
-  return filtered.filter(product => (
-    product.name.toLowerCase().includes(query.toLowerCase())
-  ));
+  return filtered.filter((product) => {
+    const lowerCasedName = product.name.toLowerCase();
+    const lowerCasedQuery = query.toLowerCase();
+
+    return (
+      lowerCasedName.includes(lowerCasedQuery)
+    );
+  });
 };
 
 const sortProducts = (filteredProducts, sort) => {

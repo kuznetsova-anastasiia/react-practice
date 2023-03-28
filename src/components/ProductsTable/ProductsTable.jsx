@@ -52,7 +52,7 @@ export const ProductsTable = ({ products, sort, setSort }) => {
 
       <tbody>
         {products.map((product) => {
-          const { id, name, category, user } = product;
+          const { id, name, category: { icon, title }, user } = product;
 
           return (
             <tr data-cy="Product" key={id}>
@@ -64,7 +64,7 @@ export const ProductsTable = ({ products, sort, setSort }) => {
                 {name}
               </td>
               <td data-cy="ProductCategory">
-                {`${category.icon} - ${category.title}`}
+                {`${icon} - ${title}`}
               </td>
 
               <td
